@@ -35,17 +35,17 @@ namespace Cheat
 
 		static ImGuiWindowFlags classFinderWindowFlags = 0;
 
-		ImGui::Begin("HSR-GC", 0, classFinderWindowFlags);
+		ImGui::Begin("StarRail-GC", 0, classFinderWindowFlags);
 
 		ImGui::BeginTabBar("##tabs");
 
 		if (ImGui::BeginTabItem("World"))
 		{
-			ImGui::Checkbox("Speed Modifier", &world::speed_hack);
+			ImGui::Checkbox("Speed Modifier(Super Risky)", &world::speed_hack);
 
 			if (world::speed_hack) {
-				ImGui::SliderFloat("Global", &world::global_speed, 0.1f, 10.f, "%.1f");
-				ImGui::SliderFloat("Dialogue", &world::dialogue_speed, 0.1f, 10.f, "%.1f");
+				ImGui::SliderFloat("Global", &world::global_speed, 0.1f, 5.f, "%.1f");
+				ImGui::SliderFloat("Dialogue", &world::dialogue_speed, 0.1f, 5.f, "%.1f");
 			}
 
 			ImGui::Checkbox("Peeking", &world::peeking);
@@ -54,7 +54,7 @@ namespace Cheat
 			
 
 			if (world::auto_dialogue) {
-				ImGui::Text("also works on hotkey (CAPSLOCK)");
+				ImGui::Text("also works on hotkey (DELETE)");
 				ImGui::Checkbox("Mouse Mode", &world::mouse_mode);
 			}
 
@@ -69,7 +69,7 @@ namespace Cheat
 
 			if (battle::speed_hack) {
 
-				ImGui::SliderFloat("Battle", &battle::battle_speed, 0.1f, 100.f, "%.1f");
+				ImGui::SliderFloat("Battle", &battle::battle_speed, 0.1f, 5.f, "%.1f");
 
 			}
 
@@ -230,7 +230,7 @@ namespace Cheat
 				// SendMessageA(target_window, WM_KEYUP, VK_SPACE, 0);
 				// if you know how to fix this -> create GitHub issue or Pull Req
 
-				if (hooks::game::get_is_in_dialog() || GetAsyncKeyState(VK_CAPITAL)) {
+				if (hooks::game::get_is_in_dialog() || GetAsyncKeyState(VK_DELETE)) {
 
 					Sleep(16);
 
