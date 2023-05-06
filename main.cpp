@@ -10,7 +10,7 @@ namespace anti_cheat {
 	HANDLE WINAPI h_CreateFileW(LPCWSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
 	{
 		if (memcmp(lpFileName, L"\\\\.\\ACE-BASE", 24) == 0) {
-			wprintf(L"Thread (%i) attempting to communicate with anti-cheat driver -> %s\n", GetCurrentThreadId(), lpFileName);
+			wprintf(L"Thread (%i) Attempting to communicate with ACE Anti-Cheat driver -> %s\n", GetCurrentThreadId(), lpFileName);
 
 			SuspendThread(GetCurrentThread()); // 200iq bypass for memory protection
 		}
@@ -21,7 +21,7 @@ namespace anti_cheat {
 	void Setup(uint64_t srbase) {
 		if (MH_Initialize() != MH_OK)
 		{
-			puts("Error initializing MinHook library");
+			puts("Error initializing MinHook library, Probaly game was updated.");
 
 			return;
 		}
@@ -58,7 +58,7 @@ void Setup()
 
 		GlobalSetting::ChinaVersion = true;
 
-		puts("[>] China game version detected\n[>] If you don't have the Chinese game version, please create a GitHub issue");
+		puts("[>] China game version detected\n[>] If you don't have the Chinese game version, Contact, djdoolky76#2023 @Discord ");
 	}
 
 	anti_cheat::Setup(base_address);
@@ -66,16 +66,19 @@ void Setup()
 	Sleep(15000);
 
 	if (!Direct3D.Initialization())
-		puts("[-] Failed to setup Direct3D!");
+		puts("[-] Failed to initiate Direct3D!");
 	else
 	{
-		puts("[+] Direct3D setup successfully!");
+		puts("[+] DirectX 3D setup Initiated!");
 		printf("[>] Direct3D Present: %p\n[>] Direct3D ResizeBuffers: %p\n", Direct3D.Present, Direct3D.ResizeBuffers);
 	}
 	if (!Device::Setup())
-		puts("[-] Failed to setup device hooks!");
+		puts("[-] Failed to Initiate Hooks setup!");
 	else
-		puts("[+] Device hooks setup successfully!");
+		puts("[+] Hooks setup successfully, Happy Hacking!");
+	    puts("[+] StarRail-GC Beta 1.0");
+		puts("[+] Discord: https://discord.gg/anjocally");
+		puts("[+] Credits: https://github.com/Z4ee/StarRail-S-GC");
 
 	return Cheat::Main();
 }
